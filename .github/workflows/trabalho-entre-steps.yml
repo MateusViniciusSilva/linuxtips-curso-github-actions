@@ -1,23 +1,20 @@
-name: Primeiro Workflow LinuxTips
+name: Vendo arquivos compartilhados entre Steps
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  giropops:
-    runs-on: ubuntu-lastest
+  entre-steps:
+    runs-on: ubuntu-latest
     steps:
-      - name: Confere versao do ubuntu
+      - name: Confere versao do Ubuntu
         run: cat /etc/os-release
-            
-      - name: exibir uma mensagem
-        run: echo "Estou fazendo o curso de Github Actions -" > mensagem.txt
+      
+      - name: Exibir uma mensagem
+        run: echo "Estou fazendo o curso de Github Actions da Linuxtips" > mensagem.txt
 
-      - name: qualquer outra coisa
+      - name: Qualquer outra coisa
         run: ls -lha
-            
-      - name: le conteudo do arquivo
+
+      - name: Le conteudo do arquivo
         run: cat mensagem.txt
-             
