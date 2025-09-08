@@ -6,7 +6,7 @@ on:
         image_name:
             description: "Alpine:lastest"
             required: true
-            default: 'alpine:lastest'
+            default: 'alpine:latest'
 
 jobs:
   giropops_1:
