@@ -1,8 +1,13 @@
 name: Meu primeiro desafio 
 
 on:
+    
   workflow_dispatch:
     inputs:
+        branch:
+            description: "Selecione a branch"
+            required: true
+            default: Desafio-1
         image_name:
             description: "Alpine:lastest"
             required: true
