@@ -24,7 +24,7 @@ jobs:
           docker pull ${{ github.event.inputs.image_name }}
 
       - name: lista imagens docker
-        uses: docker images
+        run: docker images
 
   giropops_2:
     runs-on: ubuntu-latest
