@@ -33,6 +33,13 @@ jobs:
       - name: Exibir uma mensagem
         run: echo "Executando analise de vulnerabilidades usando docker scout"
 
+      - name: Login docker hub
+        id: docker-scout
+        uses: docker/scout-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
       - name: Iniciando o Docker Scout
         id: docker-scout
         uses: docker/scout-action@v1
@@ -40,3 +47,4 @@ jobs:
           command: cves
           image: ${{ github.event.inputs.image_name }}
           only-severities: critical,high,warning
+          github-token: ${{ secrets.GITHUB_TOKEN }}
