@@ -36,7 +36,7 @@ jobs:
     needs: giropops_1
     steps: 
       - name: Exibir uma mensagem
-        run: echo "Executando analise de vulnerabilidades usando docker scout"
+        run: echo "Executando analise de vulnerabilidades usando docker scout teste"
 
       - name: Login docker hub
         id: docker-login
