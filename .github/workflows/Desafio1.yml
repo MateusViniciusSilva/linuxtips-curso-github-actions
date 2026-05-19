@@ -1,0 +1,55 @@
+name: Meu primeiro desafio 
+
+on:
+    
+  workflow_dispatch:
+    inputs:
+        branch:
+            description: "Selecione a branch"
+            required: true
+            default: Desafio-1
+        image_name:
+            description: "Alpine:lastest"
+            required: true
+            default: 'alpine:latest'
+
+jobs:
+  giropops_1:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Exibir uma mensagem
+        run: echo "Meu primeiro desafio"
+ 
+      - name: Check repo
+        uses: actions/checkout@v4
+
+      - name: pull da imagem
+        run: |
+          echo "Puxando imagem: ${{ github.event.inputs.image_name }}"
+          docker pull ${{ github.event.inputs.image_name }}
+
+      - name: lista imagens docker
+        run: docker images
+
+  giropops_2:
+    runs-on: ubuntu-latest
+    needs: giropops_1
+    steps: 
+      - name: Exibir uma mensagem
+        run: echo "Executando analise de vulnerabilidades usando docker scout"
+
+      - name: Login docker hub
+        id: docker-login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_NAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Iniciando o Docker Scout
+        id: docker-scout
+        uses: docker/scout-action@v1
+        with:
+          command: cves
+          image: ${{ github.event.inputs.image_name }}
+          only-severities: critical,high
+          github-token: ${{ secrets.GITHUB_TOKEN }}
